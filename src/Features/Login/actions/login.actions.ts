@@ -1,7 +1,9 @@
+import { buildQueries } from "@testing-library/react";
 import { login } from "../../API/api";
 import { Loading_Login, Login_Response } from "../login.types";
 
 
+import { Dispatch } from 'redux';
 
 
 
@@ -17,30 +19,32 @@ export const loader = (loading: boolean) => ({
 
 
 
-
-export const loadBuildlogs = (repoid:any, appid:any) => async (dispatch : any) => {
-
-  dispatch(loader(true));
-
+export const loadBuildlogs = (repoid: string, appid: string) => async (dispatch: Dispatch) => {
   try {
-    const BuildLogsData = await login(repoid, appid);
-    dispatch(updateResponse(BuildLogsData));
+    dispatch(loader(true)); // Start loading
+
+    // Assuming that login returns an Observable as in your previous code
+    const BuildLogsData = await login(repoid, appid).toPromise(); // Convert the Observable to a Promise
+console.log(BuildLogsData?.response)
+    dispatch(updateResponse(BuildLogsData)); // Dispatch the successful response
+
+    dispatch(loader(false)); // Stop loading
   } catch (err) {
-alert("error")
-    dispatch(loader(false));
+    console.error(err); // Log the error for debugging
+    dispatch(loader(false)); // Stop loading
 
-    return;
+    // You can dispatch an action or show an alert message here to handle the error gracefully
+    // Example: dispatch(errorAction(err.message));
   }
-
-  dispatch(loader(false));
 };
 
 
 export const updateResponse = (res:any) => {
+  console.log(res.response)
   return {
     type: Login_Response,
     payload: {
-      buildLogs: res
+      buildLogs: res.response
     }
   };
 };

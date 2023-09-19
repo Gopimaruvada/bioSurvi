@@ -8,13 +8,15 @@
   import thunk from "redux-thunk";
   import { ajax } from "rxjs/ajax";
   import { webSocket } from "rxjs/webSocket";
+  import { createBrowserHistory } from 'history';
 
   import { allReducers } from "../Features/rootReducers";
-
+import { LoginReducername } from "../../src/Features/Login/reducers/login.reducer"
   // This should also combine with any registered reducers,
   // currently the search-related dynamic reducers are created later on,
   // so we don't have them at this point in the code.
   // v3 reducer is not blacklisted
+  const history = createBrowserHistory();
   const globalReducer = combineReducers({
     ...allReducers,
     router: connectRouter(history),
@@ -22,7 +24,7 @@
   });
   
   const blacklist = [
-
+    LoginReducername,
 
     "router",
     "toastr"
@@ -68,7 +70,7 @@
   
     // eslint-disable-next-line no-shadow
     const persistor = persistStore(store);
-    const attachReducers = (store as any).attachReducers.bind(store);
+    const attachReducers = (store as any).attachReducers?.bind(store);
   
     // "redux-persist" integration
     (store as any).attachReducers = (...args: any) => {

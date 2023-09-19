@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Paper, TextField, Button, Checkbox, FormControlLabel, styled, Typography, Grid } from '@mui/material';
-import { login } from '../API/api';
-import { useSelector } from 'react-redux';
 
+import { useDispatch } from 'react-redux';
+import { loadBuildlogs } from './actions/login.actions';
+// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -11,28 +13,19 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   alignItems: 'center',
 }));
 
-const CallLogin = () => {
-    // Call the API function.
-    const subscription = login('kminchelle', '0lelplR').subscribe({
-      next: (data) => {
-        // Handle the API response data here.
-        console.log('API Response:', data);
-      },
-      error: (error) => {
-        // Handle API errors here.
-        console.error('API Error:', error);
-      },
-    });
 
-    // Clean up the subscription when the component unmounts.
-    return () => {
-      subscription.unsubscribe();
-    };
-  };
 
 const LoginPage: React.FC = () => {
+  const buildLogsData = useSelector((state:any) => state.login.data);
+console.log(buildLogsData)
+const dispatch:any = useDispatch();
 
-  const Userdetails = useSelector(((state :any )=> (state.login.data)));
+  const CallLogin = () => {
+
+    dispatch(loadBuildlogs('kminchelle', '0lelplR'));
+
+  };
+
 
   return (
     <Grid style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>

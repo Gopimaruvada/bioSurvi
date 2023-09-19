@@ -7,7 +7,7 @@ export function login(username: string, password: string) {
   return ajax.post('https://dummyjson.com/auth/login', { username, password }).pipe(
     map((response) => {
       // Map the response to the data property.
-      return response.response;
+      return response;
     }),
     catchError((error) => {
 

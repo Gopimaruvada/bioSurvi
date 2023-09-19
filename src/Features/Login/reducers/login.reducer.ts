@@ -22,9 +22,10 @@ datloading: payload.loading
 
 
   const handleResponse = (state:any, payload:any) => {
+    console.log(payload)
     return{
         ...state,
-data: payload.data
+data: payload.buildLogs
     }
   }
 
