@@ -4,6 +4,7 @@ import { Loading_Login, Login_Response } from "../login.types";
 
 
 import { Dispatch } from 'redux';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -26,15 +27,17 @@ export const loadBuildlogs = (repoid: string, appid: string) => async (dispatch:
     // Assuming that login returns an Observable as in your previous code
     const BuildLogsData = await login(repoid, appid).toPromise(); // Convert the Observable to a Promise
 console.log(BuildLogsData?.response)
+
+
+
     dispatch(updateResponse(BuildLogsData)); // Dispatch the successful response
-
-    dispatch(loader(false)); // Stop loading
+  
+    dispatch(loader(false)); 
   } catch (err) {
-    console.error(err); // Log the error for debugging
-    dispatch(loader(false)); // Stop loading
+    console.error(err); 
+    dispatch(loader(false)); 
 
-    // You can dispatch an action or show an alert message here to handle the error gracefully
-    // Example: dispatch(errorAction(err.message));
+    
   }
 };
 

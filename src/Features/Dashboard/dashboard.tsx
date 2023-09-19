@@ -1,30 +1,25 @@
-import React from 'react';
+// Sidebar.tsx
+import React, { useState } from "react";
 
+import SideBar from "../SideBar/sidebar";
+import Navbar from "../Navbar/navbar";
+import { Grid } from "@mui/material";
 
-const Dashboard: React.FC = () => {
+const DashboardPage: React.FC = () => {
   return (
-    <div className="dashboard">
-      {/* Sidebar (10%) */}
-      <div className="sidebar">
-        {/* Sidebar content goes here */}
-        <div>Sidebar Content</div>
-      </div>
-      {/* Content (90%) */}
-      <div className="content">
-        {/* Material-UI accordions (30%) */}
-        <div className="accordions">
-          {/* Accordion components go here */}
-          <div>Accordion 1</div>
-          <div>Accordion 2</div>
-        </div>
-        {/* Data (70%) */}
-        <div className="data">
-          {/* Data content goes here */}
-          <div>Data Content</div>
-        </div>
-      </div>
+    <div>
+      <Navbar />
+      <Grid style={{width:'100%'}}>
+       <Grid style={{width:'25%'}}>
+       <SideBar />
+       </Grid>
+       <Grid style={{width:'75%'}}>
+       <p>OuT Break Insights</p>
+       </Grid>
+       
+      </Grid>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
