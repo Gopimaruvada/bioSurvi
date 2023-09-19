@@ -3,22 +3,21 @@ import React, { useState } from "react";
 
 import SideBar from "../SideBar/sidebar";
 import Navbar from "../Navbar/navbar";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const DashboardPage: React.FC = () => {
   return (
-    <div>
+    <Grid>
       <Navbar />
-      <Grid style={{width:'100%'}}>
-       <Grid style={{width:'25%'}}>
-       <SideBar />
-       </Grid>
-       <Grid style={{width:'75%'}}>
-       <p>OuT Break Insights</p>
-       </Grid>
-       
+      <Grid style={{ display: "flex" }}>
+        <Grid style={{ flex: "0 0 25%" }}>
+          <SideBar />
+        </Grid>
+        <Grid style={{ flex: "1" }}>
+          <Typography>Out Break insights</Typography>
+        </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 
